@@ -5,9 +5,11 @@ import config from "config";
 export interface UserDocument extends mongoose.Document {
   email: string;
   fullName: string;
-  location: String;
+  latitude: String;
+  longitude: String;
   phone: String;
   password: string;
+  isVendor: boolean;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -17,7 +19,9 @@ const UserSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     fullName: { type: String, required: true },
-    location: { type: String, required: true },
+    latitude: { type: String, required: true },
+    longitude: { type: String, required: true },
+    isVendor: { type: Boolean, default: false },
     phone: { type: String, required: true },
     password: { type: String, required: true },
   },
